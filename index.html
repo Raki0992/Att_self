@@ -15,16 +15,20 @@
         }
         h1 {
             color: #FFFFFF; /* 글자색: 하얀색 */
-            font-size: 24px; /* 글자 크기 (필요 시 조정 가능) */
+            font-size: 24px; /* 글자 크기 */
             position: absolute; /* 상단 고정 */
             top: 10px; /* 상단에서 약간 띄움 */
             text-align: center;
             width: 100%;
         }
         .attractt-container {
-            width: 1000px; /* 가로 1000px */
-            height: 700px; /* 세로 700px */
-            margin-bottom: 20px; /* 하단 여백 (필요 시 조정) */
+            width: 800px; /* 가로 800px */
+            height: 450px; /* 세로 450px (16:9 비율) */
+            margin: 20px 0 40px 0; /* 위 20px, 아래 40px 여백 */
+            padding: 20px; /* 내부 여백 20px */
+            box-sizing: border-box; /* 패딩 포함 크기 계산 */
+            overflow: hidden; /* 넘치는 콘텐츠 숨김 */
+            background-color: #000000; /* 보드 주변 배경도 검정으로 */
         }
     </style>
 </head>
