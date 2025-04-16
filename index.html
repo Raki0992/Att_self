@@ -37,6 +37,7 @@
     <div class="attractt-container" data-idx="0" data-code="ms2mgdw97VVAJ9r" data-board="slide"></div>
 
     <script type="text/javascript">
+        // ATTRACTT 기본 스크립트
         (function(d, s) {
             var j, e = d.getElementsByTagName(s)[0], h = "https://cdn.attractt.com/embed_v2/index.js";
             if (typeof AttracttTower === "function" || e.src === h) { return; }
@@ -45,6 +46,56 @@
             j.async = true;
             e.parentNode.insertBefore(j, e);
         })(document, "script");
+
+        // 자동 슬라이드 스크립트
+        (function() {
+            const slideInterval = 15000; // n초 (밀리초 단위, 15초)
+            const direction = "right"; // k 방향 ("left" 또는 "right")
+            let preloadedImages = []; // 프리로딩용 이미지 배열
+
+            // 버튼 클래스명 (실제 클래스명으로 변경 필요)
+            const prevButtonClass = ".attractt-prev"; // 가정
+            const nextButtonClass = ".attractt-next"; // 가정
+
+            // 버튼 클릭 함수
+            function clickSlideButton() {
+                const button = document.querySelector(direction === "right" ? nextButtonClass : prevButtonClass);
+                if (button) {
+                    button.click(); // 버튼 클릭
+                    preloadNextContent(); // 다음 콘텐츠 프리로딩
+                } else {
+                    console.warn("Slide button not found. Check class names:", prevButtonClass, nextButtonClass);
+                }
+            }
+
+            // 프리로딩 함수 (이미지 캐싱)
+            function preloadNextContent() {
+                // ATTRACTT의 콘텐츠는 동적으로 로드되므로, 이미지 URL을 추측하거나 API 호출
+                // 실제로는 ATTRACTT API 문서가 필요하지만, 예시로 이미지 캐싱 구현
+                try {
+                    const images = document.querySelectorAll(".attractt-container img");
+                    preloadedImages = []; // 이전 캐시 초기화
+                    images.forEach(img => {
+                        const src = img.src;
+                        if (src) {
+                            const preloadImg = new Image();
+                            preloadImg.src = src;
+                            preloadedImages.push(preloadImg);
+                        }
+                    });
+                } catch (e) {
+                    console.warn("Error preloading images:", e);
+                }
+            }
+
+            // 페이지 로드 후 초기화
+            window.addEventListener("load", () => {
+                // 초기 프리로딩
+                preloadNextContent();
+                // 주기적 슬라이드
+                setInterval(clickSlideButton, slideInterval);
+            });
+        })();
     </script>
 </body>
 </html>
